@@ -1,3 +1,5 @@
+
+"""Import the Tkinter module and QuizBrain class"""
 from tkinter import *
 from quiz_brain import QuizBrain
 
@@ -5,7 +7,7 @@ THEME_COLOR = "darkBlue"
 
 
 class QuizInterface:
-
+    """Function create the UI"""
     def __init__(self, quiz_brain: QuizBrain):
         self.quiz = quiz_brain
 
@@ -38,7 +40,7 @@ class QuizInterface:
         self.get_next_question()
 
         self.window.mainloop()
-
+    """This function take tthe next question from quiz_brain and display it on UI"""
     def get_next_question(self):
         self.canvas.config(bg="white")
         if self.quiz.still_has_questions():
@@ -49,14 +51,14 @@ class QuizInterface:
             self.canvas.itemconfig(self.question_text, text="You've reached the end of the quiz.")
             self.true_button.config(state="disabled")
             self.false_button.config(state="disabled")
-
+    """Function check if the user pressthe correct button"""
     def true_pressed(self):
         self.give_feedback(self.quiz.check_answer("True"))
-
+    """Function check if the user pressthe wrong button"""
     def false_pressed(self):
         is_right = self.quiz.check_answer("False")
         self.give_feedback(is_right)
-
+    """Function give feedback to user in function of their choise"""
     def give_feedback(self, is_right):
         if is_right:
             self.canvas.config(bg="green")
